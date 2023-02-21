@@ -59,15 +59,16 @@ resource "aws_instance" "test" {
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   subnet_id = "aws_subnet.main.*.id[0]"
 
-  tags = {
-    Name = "Test-Centos"
-  }
+  tags       = merge(
+    local.common_tags,
+    { Name = "${var.env}-EC2" }
+  )
 
 }
 resource "aws_security_group" "allow_tls" {
   name        = "allow_tls"
   description = "Allow TLS inbound traffic"
-
+  vpc_id = aws_vpc.main.id
 
 
   ingress {
@@ -86,7 +87,8 @@ resource "aws_security_group" "allow_tls" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-    Name = "allow_tls"
-  }
+  tags       = merge(
+    local.common_tags,
+    { Name = "${var.env}-SG" }
+  )
 }
