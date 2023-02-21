@@ -67,7 +67,7 @@ resource "aws_instance" "test" {
 resource "aws_security_group" "allow_tls" {
   name        = "allow_tls"
   description = "Allow TLS inbound traffic"
-  subnet_id = "aws_subnet.main.id"
+
 
 
   ingress {
