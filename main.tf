@@ -98,7 +98,7 @@ resource "aws_route_table" "private" {
 
   tags       = merge(
     local.common_tags,
-    { Name = "${var.env}-public-routetable" }
+    { Name = "${var.env}-private-routetable" }
   )
 }
 resource "aws_route_table_association" "private-rt-assoc" {
