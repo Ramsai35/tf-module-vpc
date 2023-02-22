@@ -69,7 +69,21 @@ resource "aws_route_table_association" "public-rt-assoc" {
   subnet_id      = aws_subnet.public.*.id[count.index]
   route_table_id = aws_route_table.public.id
 }
+resource "aws_eip" "ngw-eip" {
+  vpc = true
+}
 
+resource "aws_nat_gateway" "ngw" {
+  allocation_id = aws_eip.ngw-eip.id
+  subnet_id = aws_subnet.public.*.id[0]
+
+  tags       = merge(
+    local.common_tags,
+    { Name = "${var.env}-NGW" }
+  )
+
+
+}
 
 #resource "aws_route" "default" {
 #  route_table_id            = aws_vpc.main.default_route_table_id
