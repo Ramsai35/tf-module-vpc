@@ -109,7 +109,7 @@ resource "aws_route_table_association" "private-rt-assoc" {
 
 resource "aws_route" "default" {
   route_table_id            = aws_vpc.main.default_route_table_id
-  destination_cidr_block    = "172.31.0.0/16"
+  destination_cidr_block    = var.cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 }
 #resource "aws_route" "igw-route" {
