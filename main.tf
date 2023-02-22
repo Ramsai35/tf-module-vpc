@@ -63,7 +63,7 @@ resource "aws_route_table" "public" {
     { Name = "${var.env}-public-routetable" }
   )
   }
-}
+
 #resource "aws_route" "default" {
 #  route_table_id            = aws_vpc.main.default_route_table_id
 #  destination_cidr_block    = "172.31.0.0/16"
